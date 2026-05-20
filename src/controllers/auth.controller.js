@@ -55,5 +55,44 @@ async function registerUserController(req, res){
   })
 }
 
+/**
+ * @name loginUserController 
+ * @description Login a new user, expects username and password in the request body
+ * @access Public
+ */
+async function loginUserController(req, res){
+  const {username, password} = req.body;
+
+  const user = await userModel.findOne({username})
+
+  if(!user){
+    return res.status(400).json({
+      message: "Invalid username or password"
+    })
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if(!isPasswordValid){
+    return res.status(400).json({
+      message: "Invalid username or password"
+    })
+  }
+  const token = jwt.sign({
+    id: user._id,
+    username: user.username
+  }, process.env.JWT_SECRET, {expiresIn: '1d'})
+
+  res.cookie('token', token)
+  res.status(201).json({
+    message: "User registered successfully",
+    user:{
+      id: user._id,
+      email: user.email,
+      username: user.username
+    }
+  })
+}
+
 
 module.exports = {registerUserController}
