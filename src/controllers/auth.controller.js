@@ -95,4 +95,4 @@ async function loginUserController(req, res){
 }
 
 
-module.exports = {registerUserController}
+module.exports = {registerUserController, loginUserController}
