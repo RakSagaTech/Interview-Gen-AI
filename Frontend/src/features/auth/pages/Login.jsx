@@ -5,7 +5,7 @@ import '../auth.form.scss'
 
 const Login = () => {
 
-  const [loading, handleLogin] = useAuth() 
+  const {loading, handleLogin} = useAuth() 
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

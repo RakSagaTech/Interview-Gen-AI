@@ -4,7 +4,7 @@ import {register, login, logout} from '../services/auth.api.js';
 
 
 
-export const useAuth = () =>{
+export const useAuth = () => {
   const context = useContext(AuthContext)
   const {user, setUser, loading, setLoading} = context 
 
@@ -16,9 +16,9 @@ export const useAuth = () =>{
     setLoading(false)
   }
 
-  const handleLogin = async({email, password}) =>{
+  const handleLogin = async({username, password}) =>{
     setLoading(true)
-    const data = await login({email, password})
+    const data = await login({username, password})
     setUser(data.user)
     setLoading(false)
   }
