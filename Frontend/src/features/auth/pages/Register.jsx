@@ -1,9 +1,12 @@
-import { Link} from 'react-router'
+import { Link, useNavigate} from 'react-router'
 import {useState} from 'react'
 import {useAuth} from '../hooks/useAuth'
 import '../auth.form.scss'
 
 const Register = () => {
+
+  const navigate = useNavigate()
+
 
   const {loading, handleRegister} = useAuth()
 
@@ -15,6 +18,7 @@ const Register = () => {
   const handleSubmit = async(e) =>{
     e.preventDefault()
     await handleRegister({email, username, password})
+    navigate('/')
   }
 
   if(loading){
