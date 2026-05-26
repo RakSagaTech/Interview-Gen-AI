@@ -51,6 +51,8 @@ const preparationPlanSchema = new mongoose.Schema({
     type: String,
      required: [true, "Task description is required"],
   }]
+},{
+  _id: false
 })
 
 const skillGapSchema = new mongoose.Schema({
