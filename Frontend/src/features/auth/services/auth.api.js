@@ -33,11 +33,14 @@ export async function logout(){
   }
 }
 
-export async function getMe(){
-  try{
+export async function getMe() {
+  try {
     const response = await api.get('/api/auth/get-me')
-    return response.data 
-  }catch(err){
-    console.error('Failed to fetch user data:', err)
+    return response.data
+  } catch (err) {
+    if (err.response?.status !== 401) {
+      console.error(err)
+    }
+    throw err
   }
-}
+} 
